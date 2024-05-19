@@ -201,21 +201,21 @@ def run(
                     n = (det[:, 5] == c).sum()  # detections per class
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
 
-                account_sid = 'AC2b31ab655d365b542314e6ba66836946'
-                auth_token = '0ebb34f6c86bc592fbee1956c1336964'
-                twilio_number = '+13344878646'
+                account_sid = 'key here'
+                auth_token = 'tokern here'
+                twilio_number = 'number here'
                 client = Client(account_sid, auth_token)
                 # Write results
                 for *xyxy, conf, cls in reversed(det):
-                    c = int(cls)  # integer class
-                    if model.names[c] == 'fire' and not fire_detected:
+                    c = int(cls)  
+                    if model.names[c] == 'fire' or 'fires' and not fire_detected:
                         print('yes fire')
                         message = client.messages.create(
                             body="Urgent Alert: Fire detected in the building. Path p2 is blocked for safety. Evacuate immediately. For assistance, access the evacuation map here: http://127.0.0.1:5502/map7.html",
-                            from_=twilio_number,  # Your Twilio phone number
-                            to='+919061324885'  # The phone number to send the message to
+                            from_=twilio_number,  
+                            to='sender number' 
                         )
-                        # Set the flag to True after sending the message
+                       
                         fire_detected = True
                     label = names[c] if hide_conf else f"{names[c]}"
                     confidence = float(conf)

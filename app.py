@@ -50,7 +50,7 @@ def detect_video():
 
     subprocess.run(['python', 'detect.py', '--source', os.path.join(uploads_dir, filename), '--weights', './best.pt'])
 
-    # Assuming detect.py saves the output in a directory like /runs/detect/exp*
+    
     output_dir = './runs/detect/'
     exp_dirs = [d for d in os.listdir(output_dir) if d.startswith('exp')]
     latest_exp_dir = max(exp_dirs, key=lambda d: os.path.getmtime(os.path.join(output_dir, d)))
